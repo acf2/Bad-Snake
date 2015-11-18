@@ -187,6 +187,8 @@ GoodFruit(aposition: Coordinates, atimer: size_t)</panel_attributes>
     </coordinates>
     <panel_attributes>Game
 --
+effects: unodered_map&lt; std::string, std::function&lt; void() &gt; &gt;
+--
 +set_field(field: AbstractField*)
 +set_snake(snake: AbstractSnake*)
 +set_score(score: AbstractScore*)
@@ -257,13 +259,14 @@ GoodFruit(aposition: Coordinates, atimer: size_t)</panel_attributes>
     <type>com.umlet.element.Note</type>
     <coordinates>
       <x>610</x>
-      <y>380</y>
-      <w>260</w>
-      <h>70</h>
+      <y>400</y>
+      <w>310</w>
+      <h>100</h>
     </coordinates>
     <panel_attributes>Функция maincycle возвращает
 количество очков после
 окончания игры.
+effects - возможные игровые эффекты.
 bg=yellow</panel_attributes>
     <additional_attributes/>
   </element>
@@ -403,7 +406,8 @@ Direction</panel_attributes>
 /+load_sprite(...): bool/
 /+draw(Field: AbstractField*): void/
 /+position(): Coordinates/
-/+decrement_timer(): void/</panel_attributes>
+/+decrement_timer(): void/
+/+type(): std::string/</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -678,7 +682,7 @@ m2=1</panel_attributes>
 /+tail_coordinates(): Coordinates/
 /+set_head_direction(dir: Direction): void/
 /+get_head_direction(): Direction/
-/+move_forward(): void/
+/+move_forward(with_growth: bool): void/
 /+collides(obj: Coordinates): bool/
 /+draw(Field: AbstractField*): void/</panel_attributes>
     <additional_attributes/>
