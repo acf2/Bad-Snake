@@ -1,13 +1,12 @@
 #include "field.h"
 
-Field::Field(Coordinates asize, bool* awalls) {
+Field::Field(Coordinates asize, std::vector< bool > awalls) {
 	
 }
 
 Field::~Field() {
 	
 }
-
 
 bool const* Field::get_mask() {
 	

@@ -1,6 +1,6 @@
 #include "snake.h"
 
-Snake::Snake() {
+Snake::Snake(AbstractField* afield, std::vector< Coordinates > ajunctions) {
 	
 }
 
@@ -8,16 +8,15 @@ Snake::~Snake() {
 	
 }
 
-
 bool const* Snake::get_mask() {
 	
 }
 
-Coordinates Snake::head_coordinates() {
+Coordinates Snake::get_head_position() {
 	
 }
 
-Coordinates Snake::tail_coordinates() {
+Coordinates Snake::get_tail_position() {
 	
 }
 

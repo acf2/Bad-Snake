@@ -1,6 +1,11 @@
 #include "game.h"
 
-Game::Game() {
+Game::Game(
+	AbstractField* afield,
+	AbstractSnake* asnake,
+	AbstractScore* ascore,
+	std::vector< FruitCreator* > afruit_creators
+) {
 
 }
 
