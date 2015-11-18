@@ -21,7 +21,7 @@ public:
 	virtual Coordinates tail_coordinates() = 0;
 	virtual void set_head_direction(Direction dir) = 0;
 	virtual Direction get_head_direction() = 0;
-	virtual void move_forward() = 0;
+	virtual void move_forward(bool) = 0;
 	//virtual void draw(AbstractField* field) = 0;
 	virtual bool collides(Coordinates position) = 0;
 };
@@ -44,7 +44,7 @@ public:
 	virtual Coordinates tail_coordinates();
 	virtual void set_head_direction(Direction dir);
 	virtual Direction get_head_direction();
-	virtual void move_forward();
+	virtual void move_forward(bool with_growth = 1);
 	//virtual void draw(AbstractField* field);
 	virtual bool collides(Coordinates position);
 };

@@ -29,7 +29,7 @@ Direction Snake::get_head_direction() {
 	
 }
 
-void Snake::move_forward() {
+void Snake::move_forward(bool with_growth) {
 	
 }
 
