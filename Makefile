@@ -6,9 +6,10 @@ EXEC=$(BINDIR)/bsnake
 TEST_EXEC=$(BINDIR)/gtest_bsnake
 
 SRC := $(shell find $(SRCDIR) -name \*.cpp)
-OBJ := $(patsubst */%.cpp,$(OBJDIR)/%.o,$(SRC))
+OBJ := $(patsubst %.cpp,$(OBJDIR)/%.o,$(notdir $(SRC)))
 TEST_SRC := $(shell find $(TEST_DIR) -name \*.cpp)
-TEST_OBJ := $(patsubst */%.cpp,$(OBJDIR)/%.o,$(SRC))
+TEST_OBJ := $(patsubst %.cpp,$(OBJDIR)/%.o,$(notdir $(TEST_SRC)))
+TESTED_MODULES := $(patsubst test_%.cpp,$(OBJDIR)/%.o,$(notdir $(TEST_SRC)))
 
 DEBUG=-DDEBUG -g3 -w -pedantic -Wall
 RELEASE=-DNDEBUG -O2
@@ -41,16 +42,14 @@ test: LDFLAGS := $(LDFLAGS) $(TEST_LIB) $(TEST_LDFLAGS)
 test: $(TEST_EXEC)
 
 $(EXEC): $(OBJ) | $(BINDIR)
-	g++ $(CXXFLAGS) $(INC) -o $(EXEC) $(OBJ) $(LDFLAGS)
+	g++ $(CXXFLAGS) -o $(EXEC) $(OBJ) $(LDFLAGS)
 
-VPATH = $(SRCDIR):$(LIBDIR)
-$(OBJDIR)/%.o: %.cpp
-	g++ -c $(CXXFLAGS) $< -o $@
+VPATH = $(shell find $(SRCDIR) $(LIBDIR) $(TEST_DIR) -type d | tr '\n' ':' | sed -e 's/:$$//')
+$(OBJDIR)/%.o: %.cpp | $(OBJDIR)
+	g++ -c $(CXXFLAGS) $(INC) $< -o $@
 
-$(TEST_EXEC): $(TEST_OBJ) | $(BINDIR)
-	g++ $(CXXFLAGS) $(INC) -o $(TEST_EXEC) $(TEST_OBJ) $(LDFLAGS) 
-
-$(OBJ): | $(OBJDIR)
+$(TEST_EXEC): $(TESTED_MODULES) $(TEST_OBJ) | $(BINDIR)
+	g++ $(CXXFLAGS) -o $(TEST_EXEC) $(TESTED_MODULES) $(TEST_OBJ) $(LDFLAGS)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
