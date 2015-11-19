@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 #include <list>
-#include <map>
+#include <unordered_map>
 #include <functional>
 
 #include "../Field/field.h"
@@ -23,7 +23,7 @@ public:
 
 class Game : public AbstractGame {
 private:
-	std::unodered_map< std::string, std::function< void() > > effects;
+	std::unordered_map< std::string, std::function< void() > > effects;
 
 	AbstractField* field;
 	AbstractSnake* snake;
